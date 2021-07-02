@@ -8,7 +8,7 @@ const fetch = require('node-fetch'); */
 const express = require('express');
 const router = express.Router();
 
-router.all((_, res) => res.send('Coming soon!'));
+router.all('/', (_, res) => res.send('Coming soon!'));
 
 module.exports = {
 	enabled: true,
