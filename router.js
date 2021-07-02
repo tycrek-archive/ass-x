@@ -10,4 +10,8 @@ const router = express.Router();
 
 router.all((_, res) => res.send('Coming soon!'));
 
-module.exports = router;
+module.exports = {
+	enabled: true,
+	endpoint: '/dashboard',
+	router
+};
