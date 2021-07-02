@@ -3,6 +3,7 @@ if (require.main === module) {
 	process.exit(1);
 }
 
+const { name, version } = require('./package.json');
 /* const fs = require('fs-extra');
 const fetch = require('node-fetch'); */
 const express = require('express');
@@ -11,6 +12,7 @@ const router = express.Router();
 router.all('/', (_, res) => res.send('Coming soon!'));
 
 module.exports = {
+	brand: `${name} v${version}`,
 	enabled: true,
 	endpoint: '/dashboard',
 	router
