@@ -12,8 +12,8 @@ const router = express.Router();
 router.all('/', (_, res) => res.send('Coming soon!'));
 
 module.exports = {
-	brand: `${name} v${version}`,
+	router,
 	enabled: true,
+	brand: `${name} v${version}`,
 	endpoint: '/dashboard',
-	router
 };
