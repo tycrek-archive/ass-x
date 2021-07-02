@@ -1,0 +1,24 @@
+{
+  "name": "ass-x",
+  "version": "0.0.1",
+  "description": "Private front-end for ass premium",
+  "main": "router.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tycrek/ass-x.git"
+  },
+  "author": "tycrek <t@tycrek.com> (https://tycrek.com)",
+  "license": "UNLICENCED",
+  "bugs": {
+    "url": "https://github.com/tycrek/ass-x/issues"
+  },
+  "homepage": "https://github.com/tycrek/ass-x#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs-extra": "^10.0.0",
+    "node-fetch": "^2.6.1"
+  }
+}
