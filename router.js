@@ -40,6 +40,10 @@ function verifySession(req, _res, next) {
 	Object.prototype.hasOwnProperty.call(activeTokens, req.session.token || INVALID_STRING) ? next() : next(INVALID_STRING);
 }
 
+function deepGetResourceColor(resource) {
+	return getResourceColor(resource.opengraph.color || null, resource.vibrant);
+}
+
 // Routes
 router.use(express.json());
 router.use(session({
@@ -68,8 +72,14 @@ router.get('/user', (req, res) => res.render(getRenderPath('user'), {
 	uploads: Object.entries(data).filter(([, resource]) => resource.token === activeTokens[req.session.token]).map(([resourceId, resource]) => (resource.meta = {
 		timestamp: formatTimestamp(resource.timestamp),
 		size: formatBytes(resource.size),
-		color: getResourceColor(resource.opengraph.color || null, resource.vibrant)
-	}, [resourceId, resource])).reverse()
+		color: deepGetResourceColor(resource),
+		borderCss: `` +
+			`.thumbnail.${resourceId} {` +
+			`border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) ${deepGetResourceColor(resource)};` +
+			`transition: border-color 50ms linear;` +
+			`}` +
+			`.thumbnail.${resourceId}:hover { border-color: ${deepGetResourceColor(resource)}; }`
+	}, [resourceId, resource])).reverse(),
 }));
 
 // Process login attempt

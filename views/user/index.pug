@@ -2,7 +2,8 @@ include ../__main
 
 mixin resource(resourceId, resourceData)
 	figure
-		img.thumbnail(style=`border-left: 4px solid ${resourceData.meta.color};` decoding='async' loading='lazy' src=`/${resourceId}/thumbnail` onclick=`updateViewer('${resourceId}', '/${resourceId}/direct', '${resourceData.originalname}', '${resourceData.mimetype}');`)&attributes(attrs)
+		style !{resourceData.meta.borderCss}
+		img.thumbnail(class=resourceId decoding='async' loading='lazy' src=`/${resourceId}/thumbnail` onclick=`updateViewer('${resourceId}', '/${resourceId}/direct', '${resourceData.originalname}', '${resourceData.mimetype}');`)&attributes(attrs)
 		figcaption
 			span(title=resourceData.originalname)!= resourceData.originalname
 			br
