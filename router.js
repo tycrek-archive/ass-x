@@ -69,7 +69,7 @@ router.get('/user', (req, res) => res.render(getRenderPath('user'), {
 		timestamp: formatTimestamp(resource.timestamp),
 		size: formatBytes(resource.size),
 		color: getResourceColor(resource.opengraph.color || null, resource.vibrant)
-	}, [resourceId, resource]))
+	}, [resourceId, resource])).reverse()
 }));
 
 // Process login attempt
