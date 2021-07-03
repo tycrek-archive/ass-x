@@ -58,6 +58,8 @@ figure:hover {
 
 figcaption {
 	margin-top: 4px;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .metadata {
