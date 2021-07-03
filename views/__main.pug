@@ -6,7 +6,7 @@ style.
 	}
 
 	button {
-		color: white;
+		color: #EEE;
 		background-color: #fd842d;
 
 		font-size: large;
@@ -14,15 +14,17 @@ style.
 		text-decoration: none;
 
 		padding: 8px 8px 4px 8px;
+		display: inline-block;
+		box-sizing: border-box;
+		box-shadow: inset 0px -2px 0px 0px #B64D02;
+
 		border: none;
 		border-radius: 8px;
-		display: inline-block;
 
 		cursor: pointer;
-
-		transition: background-color 250ms linear;
+		transition: box-shadow 250ms;
 	}
 
 	button:hover {
-		background-color: darkorange;
+		box-shadow: inset 0px -4px 0px 0px #B64D02;
 	}
