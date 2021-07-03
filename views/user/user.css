@@ -32,15 +32,15 @@ body { max-width: 80rem; }
 	height: 140px;
 	cursor: pointer;
 
-	border-radius: 4px;
-	border-width: 0 0 0 4px;
+	border-style: solid;
+	border-width: 2px 2px 2px 4px;
+	border-radius: 4px 4px;
 	
-	transition: border-radius 50ms linear, border-width 50ms linear;
+	transition: border-radius 50ms linear;
 }
 
 .thumbnail:hover {
 	border-radius: 8px 4px 4px 8px;
-	border-left-width: 8px !important;
 }
 
 figure {
