@@ -53,3 +53,12 @@ figcaption {
 	margin-left: 2px;
 	margin-right: 3px;
 }
+
+.blur {
+	filter: blur(3px);
+	transition: filter 150ms;
+}
+
+.unblur {
+	filter: blur(0px) !important;
+}

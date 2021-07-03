@@ -13,7 +13,7 @@ mixin resource(resourceId, resourceData)
 			button.resource-buttons(onclick=`copyUrl('${domain}/${resourceId}');`) Copy URL
 			button.resource-buttons(onclick='alert("lol")') Download
 title ass-x Dashboard
-center
+center.blur.unblur#content
 	h2 Welcome, #{user.username}!
 	h4 #[strong Total uploads:] #{uploads.length}
 	#uploads: each resource, _index in uploads

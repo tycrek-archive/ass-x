@@ -1,4 +1,4 @@
-const FADE_SPEED = 200;
+const FADE_SPEED = 150;
 
 /**
  * Opens the fullscreen viewer with the specified resource
@@ -7,6 +7,7 @@ const FADE_SPEED = 200;
  */
 function updateViewer(url, type) {
 	$('#viewer-frame').html(`<${type.includes('video') ? 'video controls' : 'img'} src="${url}">`);
+	$('#content').removeClass('unblur');
 	$('#viewer').show(0, () => $('#viewer').fadeTo(FADE_SPEED, 1.0));
 }
 
@@ -14,6 +15,7 @@ function updateViewer(url, type) {
  * Close the fullscreen resource viewer
  */
 function closeViewer() {
+	$('#content').addClass('unblur');
 	$('#viewer-frame').html('<!-- None -->');
 	$('#viewer').fadeTo(FADE_SPEED, 0.0, () => $('#viewer').hide());
 }
