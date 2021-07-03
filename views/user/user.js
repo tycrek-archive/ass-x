@@ -1,13 +1,19 @@
 const FADE_SPEED = 150;
 
+function stopPropagation(event) {
+	return event.stopPropagation();
+}
+
 /**
  * Opens the fullscreen viewer with the specified resource
  * @param {String} url URL of the resource
  * @param {String} type mimetype of the resource
  */
-function updateViewer(url, type) {
-	$('#viewer-frame').html(`<${type.includes('video') ? 'video controls' : 'img'} src="${url}">`);
+function updateViewer(resourceId, url, type) {
+	const isVideo = type.includes('video');
 	$('#content').removeClass('unblur');
+	$('#viewer-frame').html(`<${isVideo ? 'video controls' : 'img'} src="${url}">${isVideo ? '</video>' : ''}<br><br>${$(`.buttons.${resourceId}`).html()}`);
+	$(`#viewer-frame > .resource-buttons.${resourceId}`).on('click', stopPropagation);
 	$('#viewer').show(0, () => $('#viewer').fadeTo(FADE_SPEED, 1.0));
 }
 

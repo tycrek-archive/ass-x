@@ -2,16 +2,18 @@ include ../__main
 
 mixin resource(resourceId, resourceData)
 	figure
-		img.thumbnail(style=`border-left: 4px solid ${resourceData.meta.color};` decoding='async' loading='lazy' src=`/${resourceId}/thumbnail` onclick=`updateViewer('/${resourceId}/direct', '${resourceData.mimetype}');`)&attributes(attrs)
+		img.thumbnail(style=`border-left: 4px solid ${resourceData.meta.color};` decoding='async' loading='lazy' src=`/${resourceId}/thumbnail` onclick=`updateViewer('${resourceId}', '/${resourceId}/direct', '${resourceData.mimetype}');`)&attributes(attrs)
 		figcaption
 			span!= resourceData.originalname
 			br
 			span.metadata #{resourceData.meta.timestamp} (#{resourceData.meta.size})
 			br
 			- var domain = resourceData.domain || 'https://ass.rip';
-			button.resource-buttons(onclick=`window.open('${domain}/${resourceId}/delete/${resourceData.deleteId}');`) Delete
-			button.resource-buttons(onclick=`copyUrl('${domain}/${resourceId}');`) Copy URL
-			button.resource-buttons(onclick='alert("lol")') Download
+			.buttons(class=resourceId style='display: none;')
+				button.resource-buttons(class=resourceId onclick=`window.location = '${domain}/${resourceId}/direct?download=yes';`) Download
+				button.resource-buttons(class=resourceId onclick=`copyUrl('${domain}/${resourceId}');`) Copy URL
+				button.resource-buttons(class=resourceId onclick=`window.open('${domain}/${resourceId}/delete/${resourceData.deleteId}');`) Delete
+
 title ass-x Dashboard
 center.blur.unblur#content
 	h2 Welcome, #{user.username}!
