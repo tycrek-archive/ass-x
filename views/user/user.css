@@ -37,8 +37,16 @@ body { max-width: 80rem; }
 }
 
 figure {
+	width: 220px;
 	margin: 24px;
 	display: inline-block;
+	border-radius: 4px;
+	border-bottom: 4px solid #212121;
+	transition: border-bottom 150ms;
+}
+
+figure:hover {
+	border-bottom: 4px solid #323232;
 }
 
 figcaption {
