@@ -28,8 +28,10 @@
 .thumbnail {
 	width: 200px;
 	height: 140px;
-	border-radius: 16px;
 	cursor: pointer;
+
+	border-radius: 4px;
+	border-width: 0 0 0 4px;
 }
 
 figure {
@@ -39,6 +41,10 @@ figure {
 
 figcaption {
 	margin-top: 4px;
+}
+
+.metadata {
+	font-size: smaller;
 }
 
 .resource-buttons {

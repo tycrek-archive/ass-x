@@ -8,6 +8,7 @@ const { name, version } = require('./package.json');
 const { useSsl } = require('../config.json');
 const { CODE_OK, CODE_UNAUTHORIZED } = require('../MagicNumbers.json');
 const random = require('../generators/gfycat');
+const { formatTimestamp, formatBytes, getResourceColor } = require('../utils');
 const path = require('path');
 
 // Setup Express router
@@ -61,7 +62,11 @@ router.get('/', (req, res) => res.redirect(`/dashboard/${req.session.token ? 'us
 router.get('/login', (_, res) => res.render(getRenderPath('login')));
 router.get('/user', (req, res) => res.render(getRenderPath('user'), {
 	user: users[activeTokens[req.session.token]],
-	uploads: Object.entries(data).filter(([, resource]) => resource.token === activeTokens[req.session.token])
+	uploads: Object.entries(data).filter(([, resource]) => resource.token === activeTokens[req.session.token]).map(([resourceId, resource]) => (resource.meta = {
+		timestamp: formatTimestamp(resource.timestamp),
+		size: formatBytes(resource.size),
+		color: getResourceColor(resource.opengraph.color || null, resource.vibrant)
+	}, [resourceId, resource]))
 }));
 
 // Process login attempt
