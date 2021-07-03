@@ -9,10 +9,10 @@ function stopPropagation(event) {
  * @param {String} url URL of the resource
  * @param {String} type mimetype of the resource
  */
-function updateViewer(resourceId, url, type) {
+function updateViewer(resourceId, url, originalname, type) {
 	const isVideo = type.includes('video');
 	$('#content').removeClass('unblur');
-	$('#viewer-frame').html(`<${isVideo ? 'video controls' : 'img'} src="${url}">${isVideo ? '</video>' : ''}<br><br>${$(`.buttons.${resourceId}`).html()}`);
+	$('#viewer-frame').html(`<${isVideo ? 'video controls' : 'img'} src="${url}" title="${originalname}">${isVideo ? '</video>' : ''}<br><br>${$(`.buttons.${resourceId}`).html()}`);
 	$(`#viewer-frame > .resource-buttons.${resourceId}`).on('click', stopPropagation);
 	$('#viewer').show(0, () => $('#viewer').fadeTo(FADE_SPEED, 1.0));
 }
