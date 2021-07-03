@@ -21,7 +21,7 @@
 
 #viewer-frame > img, #viewer-frame > video {
 	max-width: 66vw;
-	height: 66vh;
+	max-height: 66vh;
 	border-radius: 16px;
 }
 
