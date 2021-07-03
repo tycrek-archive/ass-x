@@ -5,6 +5,7 @@ if (require.main === module) {
 
 // Import info & packages
 const { name, version } = require('./package.json');
+const { name: nameAss, version: versionAss } = require('../package.json');
 const { useSsl } = require('../config.json');
 const { CODE_OK, CODE_UNAUTHORIZED } = require('../MagicNumbers.json');
 const random = require('../generators/gfycat');
@@ -59,8 +60,10 @@ router.use('/user', (err, _req, res, next) => err === INVALID_STRING ? res.redir
 router.get('/', (req, res) => res.redirect(`/dashboard/${req.session.token ? 'user' : 'login'}`));
 
 // Render login & dashboard
-router.get('/login', (_, res) => res.render(getRenderPath('login')));
+const frontendBrandCombo = `${name} v${version}<br>(Powered by ${nameAss} v${versionAss})`;
+router.get('/login', (_, res) => res.render(getRenderPath('login'), { brand: frontendBrandCombo }));
 router.get('/user', (req, res) => res.render(getRenderPath('user'), {
+	brand: frontendBrandCombo,
 	user: users[activeTokens[req.session.token]],
 	uploads: Object.entries(data).filter(([, resource]) => resource.token === activeTokens[req.session.token]).map(([resourceId, resource]) => (resource.meta = {
 		timestamp: formatTimestamp(resource.timestamp),

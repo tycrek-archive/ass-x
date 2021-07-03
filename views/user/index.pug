@@ -18,7 +18,7 @@ center
 	h4 #[strong Total uploads:] #{uploads.length}
 	#uploads: each resource, _index in uploads
 		+resource(resource[0], resource[1])
-
+	+brand
 #viewer(style='display: none;' onclick='closeViewer();'): #viewer-frame: <!-- None -->
 
 style: include user.css
