@@ -1,0 +1,19 @@
+include ../__main
+
+title ass-x Login
+center
+	h1 ass-x
+	h4 Log In
+	
+	#form
+		strong Token:&nbsp;
+		input#token(type='password')
+		br
+		text &nbsp;(use your upload token to authenticate)
+		br
+		br
+		button(onclick='login()') Login
+
+script
+	include login.js
+	

@@ -1,0 +1,26 @@
+include ../__main
+
+mixin resource(resourceId, resourceData)
+	figure
+		img.thumbnail(decoding='async' loading='lazy' src=`/${resourceId}/thumbnail` onclick=`updateViewer('/${resourceId}/direct', '${resourceData.mimetype}');`)&attributes(attrs)
+		figcaption
+			span!= resourceData.originalname
+			br
+			- var domain = resourceData.domain || 'https://ass.rip';
+			button.resource-buttons(onclick=`window.open('${domain}/${resourceId}/delete/${resourceData.deleteId}');`) Delete
+			button.resource-buttons(onclick=`copyUrl('${domain}/${resourceId}');`) Copy URL
+			button.resource-buttons(onclick='alert("lol")') Download
+
+title ass-x Dashboard
+center
+	h2 Welcome, #{user.username}!
+	h4 #[strong Total uploads:] #{user.count}
+	#uploads: each resource, _index in uploads
+		+resource(resource[0], resource[1])
+
+#viewer(style='display: none;' onclick='closeViewer();'): #viewer-frame: <!-- None -->
+
+style: include user.css
+script
+	include user.js
+	
