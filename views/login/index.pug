@@ -6,15 +6,13 @@ center
 	h4 Log In
 	
 	#form
-		strong Token:&nbsp;
-		input#token(type='password')
-		br
-		text &nbsp;(use your upload token to authenticate)
+		input#token(placeholder='Upload token' title='Enter the same token that you use for uploading' type='password' autocomplete='off' size=34 maxLength=32 autofocus required )
 		br
 		br
 		button(title='Log in' onclick='login()'): i.fas.fa-sign-in-alt
 	+brand
 
+style: include login.css
 script
 	include login.js
 	

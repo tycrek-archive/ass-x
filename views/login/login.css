@@ -1,0 +1,21 @@
+#token {
+	color: #BBB;
+	background-color: transparent;
+	padding: 8px;
+	border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #444 rgba(0, 0, 0, 0) ;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 3px;
+
+	transition: border-color 150ms linear, border-radius 150ms linear;
+}
+
+#token:focus {
+    outline: none;
+	border-color: #666;
+	border-radius: 8px;
+}
+
+h1, h2 {
+	cursor: default;
+}
