@@ -78,11 +78,6 @@ figcaption {
 	color:#9E9E9E !important;
 }
 
-.resource-buttons {
-	margin-left: 2px;
-	margin-right: 3px;
-}
-
 .blur {
 	filter: blur(3px);
 	transition: filter 150ms;
