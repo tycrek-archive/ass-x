@@ -57,10 +57,20 @@ figure:hover {
 	border-bottom: 6px solid #323232;
 }
 
-figcaption {
-	margin-top: 4px;
+.file-title {
+	max-width: 90%;
+	display: inline-flex;
+	justify-content: center;
+
+}
+
+.title-text {
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+
+figcaption {
+	margin-top: 4px;
 }
 
 .metadata {

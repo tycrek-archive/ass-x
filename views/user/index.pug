@@ -5,7 +5,12 @@ mixin resource(resourceId, resourceData)
 		style !{resourceData.meta.borderCss}
 		img.thumbnail(class=resourceId decoding='async' loading='lazy' src=`/${resourceId}/thumbnail` onclick=`updateViewer('${resourceId}', '/${resourceId}/direct', '${resourceData.originalname}', '${resourceData.mimetype}');`)&attributes(attrs)
 		figcaption
-			span(title=resourceData.originalname)!= resourceData.originalname
+			.file-title(title=resourceData.originalname)
+				if (resourceData.mimetype.includes('video'))
+					i.fas.fa-file-video
+				else
+					i.fas.fa-file-image
+				span.title-text &nbsp;!{resourceData.originalname}
 			br
 			span.metadata #{resourceData.meta.timestamp} (#{resourceData.meta.size})
 			br
@@ -34,4 +39,3 @@ center.blur.unblur#content
 style: include user.css
 script
 	include user.js
-	
