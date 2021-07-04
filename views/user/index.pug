@@ -16,14 +16,15 @@ mixin resource(resourceId, resourceData)
 			br
 			- var domain = resourceData.domain || 'https://ass.rip';
 			.buttons(class=resourceId style='display: none;')
-				button.resource-buttons(class=resourceId onclick=`window.location = '${domain}/${resourceId}/direct?download=yes';`) Download
-				button.resource-buttons(class=resourceId onclick=`copyUrl('${domain}/${resourceId}');`) Copy URL
-				button.resource-buttons(class=resourceId onclick=`window.open('${domain}/${resourceId}/delete/${resourceData.deleteId}');`) Delete
+				button.resource-buttons(class=resourceId onclick=`window.location = '${domain}/${resourceId}/direct?download=yes';`): i.fas.fa-download
+				button.resource-buttons(class=resourceId onclick=`copyUrl('${domain}/${resourceId}');`): i.fas.fa-clone
+				button.resource-buttons(class=resourceId onclick=`window.open('${domain}/${resourceId}/delete/${resourceData.deleteId}');`): i.fas.fa-trash-alt
 
 title ass-x Dashboard
 center.blur.unblur#content
 	h2#welcome Welcome, #{user.username}!
-	h4#total-uploads #[strong Total uploads:] #{totalUploads}
+	h4#total-uploads #[i.fas.fa-cloud-upload-alt] #{totalUploads}
+	//-h4#total-uploads #[i.fas.fa-photo-video] #{totalUploads}
 	#uploads: each resource, _index in uploads
 		+resource(resource[0], resource[1])
 	#nav
