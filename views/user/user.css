@@ -1,5 +1,9 @@
 body { max-width: 80rem; }
 
+#total-uploads {
+	font-size: xx-large;
+}
+
 #viewer {
 	background-color: rgba(0, 0, 0, 0.5);
 	opacity: 0;
