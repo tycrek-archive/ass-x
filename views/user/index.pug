@@ -35,6 +35,8 @@ center.blur.unblur#content
 				a.nav(href=`?page=${pages.previous}`) #[i.fal.fa-chevron-circle-left]
 			if (totalUploads - (pages.pagination + pages.size) > 0 )
 				a.nav(href=`?page=${pages.next}`) &nbsp; #[i.fal.fa-chevron-circle-right]
+	br
+	button(title='Log out' onclick='logout();'): i.fas.fa-sign-out-alt
 	+brand
 #viewer(style='display: none;' onclick='closeViewer();'): #viewer-frame: <!-- None -->
 

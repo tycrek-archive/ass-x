@@ -40,3 +40,12 @@ function copyUrl(url) {
 		.catch((err) => (console.error(err), failed = true))
 		.finally(() => console.log(`Clipboard operation ${failed ? 'failed' : 'succeeded'} (3/3)`));
 }
+
+/**
+ * Deletes the active session cookie and directs the user to login
+ */
+function logout() {
+	fetch('/dashboard/logout')
+		.then(() => window.location = '/dashboard')
+		.catch((err) => (console.error(err), alert('Error, check console for details!')));
+}

@@ -113,6 +113,12 @@ router.post('/login', (req, res) => {
 	} else res.status(CODE_UNAUTHORIZED).send(`Invalid token!`);
 });
 
+// Process logout request
+router.get('/logout', (req, res) => {
+	delete activeTokens[req.session.token];
+	res.sendStatus(200);
+});
+
 module.exports = {
 	router,
 	enabled: true,
