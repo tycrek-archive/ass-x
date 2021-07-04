@@ -28,7 +28,7 @@ const activeTokens = {};
 // Constants
 const GFYCAT = 7;
 const TIME_24H = 86400000;
-const PAGE_SIZE = 30;
+const PAGE_SIZE = process.env.NODE_ENV === 'production' ? 30 : 5;
 const INVALID_STRING = 'Invalid token';
 const FRONTEND_BRAND_COMBO = `${name} v${version}<br>(Powered by ${nameAss} v${versionAss})`;
 
