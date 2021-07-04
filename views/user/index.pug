@@ -25,12 +25,12 @@ title ass-x Dashboard
 center.blur.unblur#content
 	h2#welcome Welcome, #{user.username}!
 	h4#total-uploads #[i.fas.fa-cloud-upload-alt] #{totalUploads}
-	//-h4#total-uploads #[i.fas.fa-photo-video] #{totalUploads}
 	#uploads: each resource, _index in uploads
 		+resource(resource[0], resource[1])
 	#nav
-		h4#page-number Page #{pages.page}
 		h4#nav-buttons
+			span Page #{pages.page}
+			br
 			if (pages.page > 1)
 				a.nav(href=`?page=${pages.previous}`) #[i.fal.fa-chevron-circle-left]
 			if (totalUploads - (pages.pagination + pages.size) > 0 )
