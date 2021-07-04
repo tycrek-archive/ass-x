@@ -28,7 +28,9 @@ const activeTokens = {};
 // Constants
 const GFYCAT = 7;
 const TIME_24H = 86400000;
+const PAGE_SIZE = 30;
 const INVALID_STRING = 'Invalid token';
+const FRONTEND_BRAND_COMBO = `${name} v${version}<br>(Powered by ${nameAss} v${versionAss})`;
 
 // Functions
 
@@ -64,23 +66,41 @@ router.use('/user', (err, _req, res, next) => err === INVALID_STRING ? res.redir
 router.get('/', (req, res) => res.redirect(`/dashboard/${req.session.token ? 'user' : 'login'}`));
 
 // Render login & dashboard
-const frontendBrandCombo = `${name} v${version}<br>(Powered by ${nameAss} v${versionAss})`;
-router.get('/login', (_, res) => res.render(getRenderPath('login'), { brand: frontendBrandCombo }));
-router.get('/user', (req, res) => res.render(getRenderPath('user'), {
-	brand: frontendBrandCombo,
-	user: users[activeTokens[req.session.token]],
-	uploads: Object.entries(data).filter(([, resource]) => resource.token === activeTokens[req.session.token]).map(([resourceId, resource]) => (resource.meta = {
-		timestamp: formatTimestamp(resource.timestamp),
+router.get('/login', (_, res) => res.render(getRenderPath('login'), { brand: FRONTEND_BRAND_COMBO }));
+router.get('/user', (req, res) => {
+
+	// Set up page data
+	const pageNumber = parseInt(req.query.page || 1);
+	const pagination = (pageNumber - 1) * PAGE_SIZE;
+	const pages = {
+		page: pageNumber,
+		size: PAGE_SIZE,
+		pagination,
+		previous: pageNumber - 1,
+		next: pageNumber + 1
+	};
+
+	// Upload list
+	const uploads = Object.entries(data).filter(([, resource]) => resource.token === activeTokens[req.session.token]).map(([resourceId, resource]) => (resource.meta = {
 		size: formatBytes(resource.size),
 		color: deepGetResourceColor(resource),
+		timestamp: formatTimestamp(resource.timestamp),
 		borderCss: `` +
 			`.thumbnail.${resourceId} {` +
 			`border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) ${deepGetResourceColor(resource)};` +
 			`transition: border-color 50ms linear;` +
 			`}` +
 			`.thumbnail.${resourceId}:hover { border-color: ${deepGetResourceColor(resource)}; }`
-	}, [resourceId, resource])).reverse(),
-}));
+	}, [resourceId, resource]));
+
+	res.render(getRenderPath('user'), {
+		pages,
+		brand: FRONTEND_BRAND_COMBO,
+		user: users[activeTokens[req.session.token]],
+		uploads: uploads.reverse().slice(pagination, pagination + PAGE_SIZE),
+		totalUploads: uploads.length
+	});
+});
 
 // Process login attempt
 router.post('/login', (req, res) => {

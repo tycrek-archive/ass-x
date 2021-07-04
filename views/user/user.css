@@ -81,3 +81,15 @@ figcaption {
 .unblur {
 	filter: blur(0px) !important;
 }
+
+#nav-buttons {
+	font-size: 2rem;
+}
+
+a.nav {
+	color: #757575;
+	transition: color 250ms linear;
+}
+a.nav, a.nav:hover, a.nav:active, a.nav:visited { text-decoration: none; }
+a.nav:hover { color: #BDBDBD; }
+a.nav:active { color: #F5F5F5; }

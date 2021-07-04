@@ -17,10 +17,17 @@ mixin resource(resourceId, resourceData)
 
 title ass-x Dashboard
 center.blur.unblur#content
-	h2 Welcome, #{user.username}!
-	h4 #[strong Total uploads:] #{uploads.length}
+	h2#welcome Welcome, #{user.username}!
+	h4#total-uploads #[strong Total uploads:] #{totalUploads}
 	#uploads: each resource, _index in uploads
 		+resource(resource[0], resource[1])
+	#nav
+		h4#page-number Page #{pages.page}
+		h4#nav-buttons
+			if (pages.page > 1)
+				a.nav(href=`?page=${pages.previous}`) #[i.fal.fa-chevron-circle-left]
+			if (totalUploads - (pages.pagination + pages.size) > 0 )
+				a.nav(href=`?page=${pages.next}`) &nbsp; #[i.fal.fa-chevron-circle-right]
 	+brand
 #viewer(style='display: none;' onclick='closeViewer();'): #viewer-frame: <!-- None -->
 
