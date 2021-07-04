@@ -42,6 +42,18 @@ function copyUrl(url) {
 }
 
 /**
+ * Deletes a resource then reloads the page
+ * @param {String} url Delete URL to call
+ * @returns false because StackOverflow said so
+ */
+function deleteResource(url) {
+	fetch(url)
+		.then(() => window.location.reload())
+		.catch((err) => (console.error(err), alert('Error, check console for details!')));
+	return false;
+}
+
+/**
  * Deletes the active session cookie and directs the user to login
  */
 function logout() {
