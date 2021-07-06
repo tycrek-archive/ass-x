@@ -34,6 +34,11 @@ const FRONTEND_BRAND_COMBO = `${name} v${version}<br>(Powered by ${nameAss} v${v
 
 // Functions
 
+/**
+ * Returns an absolute path to a view for Pug using process.cwd()
+ * @param {String} view The view to build a path for
+ * @returns {String} An absolute path
+ */
 function getRenderPath(view) {
 	return path.join(process.cwd(), name, 'views/', `${view}.pug`);
 }
