@@ -1,6 +1,6 @@
 {
   "name": "ass-x",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Private front-end for ass premium",
   "private": true,
   "main": "router.js",

@@ -70,41 +70,48 @@ router.use('/user', (err, _req, res, next) => err === INVALID_STRING ? res.redir
 // Redirect index to either login or dashboard
 router.get('/', (req, res) => res.redirect(`/dashboard/${req.session.token ? 'user' : 'login'}`));
 
-// Render login & dashboard
+// Render login
 router.get('/login', (_, res) => res.render(getRenderPath('login'), { brand: FRONTEND_BRAND_COMBO }));
-router.get('/user', (req, res) => {
 
-	// Set up page data
-	const pageNumber = parseInt(req.query.page || 1);
-	const pagination = (pageNumber - 1) * PAGE_SIZE;
-	const pages = {
+// Parse page information
+router.get('/user', (req, _res, next) => {
+	const pageNumber = parseInt(req.query.page) || 1;
+	req.pages = {
 		page: pageNumber,
 		size: PAGE_SIZE,
-		pagination,
+		pagination: (pageNumber - 1) * PAGE_SIZE,
 		previous: pageNumber - 1,
 		next: pageNumber + 1
 	};
+	next();
+});
 
-	// Upload list
-	const uploads = Object.entries(data).filter(([, resource]) => resource.token === activeTokens[req.session.token]).map(([resourceId, resource]) => (resource.meta = {
-		size: formatBytes(resource.size),
-		color: deepGetResourceColor(resource),
-		timestamp: formatTimestamp(resource.timestamp),
-		borderCss: `` +
-			`.thumbnail.${resourceId} {` +
-			`border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) ${deepGetResourceColor(resource)};` +
-			`transition: border-color 50ms linear;` +
-			`}` +
-			`.thumbnail.${resourceId}:hover { border-color: ${deepGetResourceColor(resource)}; }`
-	}, [resourceId, resource]));
-
-	res.render(getRenderPath('user'), {
-		pages,
-		brand: FRONTEND_BRAND_COMBO,
-		user: users[activeTokens[req.session.token]],
-		uploads: uploads.reverse().slice(pagination, pagination + PAGE_SIZE),
-		totalUploads: uploads.length
-	});
+// Render user dashboard
+router.get('/user', async (req, res, next) => {
+	data.get()
+		.then((d) => d
+			.filter(([, resource]) => resource.token === activeTokens[req.session.token])
+			.map(([resourceId, resource]) =>
+			(resource.meta = {
+				size: formatBytes(resource.size),
+				color: deepGetResourceColor(resource),
+				timestamp: formatTimestamp(resource.timestamp),
+				borderCss: `` +
+					`.thumbnail.${resourceId} {` +
+					`border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) ${deepGetResourceColor(resource)};` +
+					`transition: border-color 50ms linear;` +
+					`}` +
+					`.thumbnail.${resourceId}:hover { border-color: ${deepGetResourceColor(resource)}; }`
+			}, [resourceId, resource])))
+		.then((uploads) =>
+			res.render(getRenderPath('user'), {
+				pages: req.pages,
+				brand: FRONTEND_BRAND_COMBO,
+				user: users[activeTokens[req.session.token]],
+				uploads: uploads.reverse().slice(req.pages.pagination, req.pages.pagination + PAGE_SIZE),
+				totalUploads: uploads.length
+			}))
+		.catch(next);
 });
 
 // Process login attempt
