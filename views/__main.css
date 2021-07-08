@@ -1,8 +1,3 @@
-:root {
-	--color-primary: #fd842d;
-}
-
-
 button {
 	color: #EEE !important;
 	background-color: var(--color-primary);
@@ -16,7 +11,7 @@ button {
 	margin-right: 16px;
 	display: inline-block;
 	box-sizing: border-box;
-	box-shadow: inset 0 0 0 0 #793301, inset 0 -4px 0 0 #B64D02;
+	box-shadow: inset 0 0 0 0 var(--color-primary-dark), inset 0 -4px 0 0 var(--color-primary-dim);
 
 	border: none;
 	border-radius: 8px;
@@ -25,8 +20,8 @@ button {
 	transition: box-shadow 150ms;
 }
 
-button:hover { box-shadow: inset 0 0 0 0 #793301, inset 0 -8px 0 0 #B64D02; }
-button:active { box-shadow: inset 0 -8px 0 0 #793301, inset 0 -64px 0 0 #B64D02; }
+button:hover { box-shadow: inset 0 0 0 0 var(--color-primary-dark), inset 0 -8px 0 0 var(--color-primary-dim); }
+button:active { box-shadow: inset 0 -8px 0 0 var(--color-primary-dark), inset 0 -64px 0 0 var(--color-primary-dim); }
 
 #brand {
 	border-top: 2px solid #323232;
