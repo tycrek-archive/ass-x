@@ -125,3 +125,11 @@ a.nav {
 a.nav, a.nav:hover, a.nav:active, a.nav:visited { text-decoration: none; }
 a.nav:hover { color: #BDBDBD; }
 a.nav:active { color: #F5F5F5; }
+
+#cloud.orange {
+	transition: color 150ms linear;
+}
+
+#cloud.orange:hover {
+	color: var(--color-primary) !important;
+}
