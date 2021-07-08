@@ -3,14 +3,12 @@ include ../__main
 mixin resource(resourceId, resourceData)
 	figure
 		style !{resourceData.meta.borderCss}
-		img.thumbnail(class=resourceId decoding='async' loading='lazy' src=`/${resourceId}/thumbnail` onclick=`updateViewer('${resourceId}', '/${resourceId}/direct', '${resourceData.originalname}', '${resourceData.mimetype}');`)&attributes(attrs)
+		img.thumbnail(class=resourceId decoding='async' loading='lazy' src=`/${resourceId}/thumbnail` onclick=`updateViewer('${resourceId}', '/${resourceId}/direct', '${resourceData.originalname}', '${resourceData.mimetype}', '${resourceData.is}');`)&attributes(attrs)
 		figcaption
 			.file-title(title=resourceData.originalname)
-				if (resourceData.mimetype.includes('video'))
-					i.fas.fa-file-video
-				else
-					i.fas.fa-file-image
-				span.title-text &nbsp;!{resourceData.originalname}
+				- const iconClass = 'fa-file-'.concat(resourceData.mimetype.includes('video') ? 'video' : resourceData.mimetype.includes('image') ? 'image' : resourceData.mimetype.includes('audio') ? 'audio' : 'alt');
+				i.file-icon.fas(class=iconClass)
+				.title-text &nbsp;!{resourceData.originalname}
 			br
 			span.metadata #{resourceData.meta.timestamp} (#{resourceData.meta.size})
 			br

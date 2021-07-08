@@ -1,4 +1,9 @@
 const FADE_SPEED = 150;
+const ELEMENT_MAP = {
+	image: 'img',
+	video: 'video',
+	audio: 'audio'
+};
 
 function stopPropagation(event) {
 	return event.stopPropagation();
@@ -8,11 +13,37 @@ function stopPropagation(event) {
  * Opens the fullscreen viewer with the specified resource
  * @param {String} url URL of the resource
  * @param {String} type mimetype of the resource
+ * @param {Object} is "Is image/video/audio/other" object of the resource
  */
-function updateViewer(resourceId, url, originalname, type) {
-	const isVideo = type.includes('video');
+function updateViewer(resourceId, url, originalname, type, is) {
+	// Fix type & is, if necessary
+	type = type.split('/')[0];
+	if (!is) is = {
+		image: type.includes('image'),
+		video: type.includes('video'),
+		audio: type.includes('audio')
+	};
+
+	// Create the element to nest inside the #viewer-frame
+	let element = $(`<${ELEMENT_MAP[type] || 'code'}>${`</${ELEMENT_MAP[type] || 'code'}>`}`, {
+		id: 'viewer-resource',
+		src: url,
+		title: originalname,
+		alt: originalname,
+		controls: true,
+		loop: true,
+		muted: is.video,
+		playsinline: is.video,
+		preload: 'metadata'
+	});
+
+	// If the element is a code block, simply put the text
+	if (!ELEMENT_MAP[type]) element.text(originalname);
+
+	// Build & display the viewer
 	$('#content').removeClass('unblur');
-	$('#viewer-frame').html(`<${isVideo ? 'video controls' : 'img'} src="${url}" title="${originalname}">${isVideo ? '</video>' : ''}<br><br>${$(`.buttons.${resourceId}`).html()}`);
+	$('#viewer-frame').append(element);
+	$('#viewer-resource').after(`<br><br>${$(`.buttons.${resourceId}`).html()}`);
 	$(`#viewer-frame > .resource-buttons.${resourceId}`).on('click', stopPropagation);
 	$('#viewer').show(0, () => $('#viewer').fadeTo(FADE_SPEED, 1.0));
 }

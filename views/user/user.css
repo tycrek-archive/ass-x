@@ -25,7 +25,7 @@ body { max-width: 80rem; }
 	z-index: 1000;
 }
 
-#viewer-frame > img, #viewer-frame > video {
+#viewer-frame > img, #viewer-frame > video, #viewer-frame > audio {
 	max-width: 66vw;
 	max-height: 66vh;
 	border-radius: 16px;
@@ -61,16 +61,37 @@ figure:hover {
 	border-bottom: 6px solid #323232;
 }
 
+code#viewer-resource {
+	background-color: transparent !important;
+	height: 3rem;
+	display: inline-block;
+
+	font-size: 2rem;
+	font-weight: bold;
+
+	transition: font-size 150ms linear;
+}
+
+code#viewer-resource:hover {
+	font-size: 2.1rem;
+}
+
 .file-title {
 	max-width: 90%;
 	display: inline-flex;
 	justify-content: center;
+	align-items: center;
+}
 
+.file-icon {
+	font-size: 1.5rem;
 }
 
 .title-text {
 	text-overflow: ellipsis;
 	overflow: hidden;
+	white-space: nowrap;
+	align-self: end;
 }
 
 figcaption {
@@ -78,8 +99,10 @@ figcaption {
 }
 
 .metadata {
+	margin-top: 6px;
 	font-size: smaller;
 	color:#9E9E9E !important;
+	display: inline-flex;
 }
 
 .blur {
