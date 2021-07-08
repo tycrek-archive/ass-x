@@ -1,6 +1,11 @@
+:root {
+	--color-primary: #fd842d;
+}
+
+
 button {
 	color: #EEE !important;
-	background-color: #fd842d;
+	background-color: var(--color-primary);
 
 	font-size: xx-large;
 	text-align: center;
