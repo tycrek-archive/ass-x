@@ -118,13 +118,12 @@ figcaption {
 	font-size: 2rem;
 }
 
-a.nav {
-	color: #757575;
+a.nav, a.nav:visited {
+	color: #757575 !important;
 	transition: color 250ms linear;
 }
-a.nav, a.nav:hover, a.nav:active, a.nav:visited { text-decoration: none; }
-a.nav:hover { color: #BDBDBD; }
-a.nav:active { color: #F5F5F5; }
+a.nav:hover { color: #BDBDBD !important; border-bottom-color: transparent !important;}
+a.nav:active { color: #F5F5F5 !important; }
 
 #cloud.orange {
 	transition: color 150ms linear;
