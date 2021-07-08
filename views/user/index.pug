@@ -3,14 +3,14 @@ include ../__main
 mixin resource(resourceId, resourceData)
 	figure
 		style !{resourceData.meta.borderCss}
-		img.thumbnail(class=resourceId decoding='async' loading='lazy' src=`/${resourceId}/thumbnail` onclick=`updateViewer('${resourceId}', '/${resourceId}/direct', '${resourceData.originalname}', '${resourceData.mimetype}', '${resourceData.is}');`)&attributes(attrs)
+		img.thumbnail(class=resourceId title='View' decoding='async' loading='lazy' src=`/${resourceId}/thumbnail` onclick=`updateViewer('${resourceId}', '/${resourceId}/direct', '${resourceData.originalname}', '${resourceData.mimetype}', '${resourceData.is}');`)&attributes(attrs)
 		figcaption
-			.file-title(title=resourceData.originalname)
+			.file-title(title=resourceData.mimetype)
 				- const iconClass = 'fa-file-'.concat(resourceData.mimetype.includes('video') ? 'video' : resourceData.mimetype.includes('image') ? 'image' : resourceData.mimetype.includes('audio') ? 'audio' : 'alt');
 				i.file-icon.fas(class=iconClass)
-				.title-text &nbsp;!{resourceData.originalname}
+				.title-text(title=resourceData.originalname) &nbsp;!{resourceData.originalname}
 			br
-			span.metadata #{resourceData.meta.timestamp} (#{resourceData.meta.size})
+			span.metadata(title=`Epoch: ${resourceData.timestamp} ms\nBytes: ${resourceData.size} `) #{resourceData.meta.timestamp} (#{resourceData.meta.size})
 			br
 			- var domain = resourceData.domain || 'https://ass.rip';
 			.buttons(class=resourceId style='display: none;')
@@ -22,7 +22,7 @@ mixin resource(resourceId, resourceData)
 title ass-x Dashboard
 center.blur.unblur#content
 	h2#welcome Welcome, #{user.username}!
-	h4#total-uploads #[i.fas.fa-cloud-upload-alt] #{totalUploads}
+	h4#total-uploads(title=`Total uploads: ${totalUploads}`) #[i#cloud.orange.fas.fa-cloud-upload-alt] #{totalUploads}
 	#uploads: each resource, _index in uploads
 		+resource(resource[0], resource[1])
 	#nav
