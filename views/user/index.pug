@@ -14,7 +14,7 @@ mixin resource(resourceId, resourceData)
 			br
 			- var domain = resourceData.domain || 'https://ass.rip';
 			.buttons(class=resourceId style='display: none;')
-				button.resource-buttons(class=resourceId title='Download' onclick=`window.location = '${domain}/${resourceId}/direct?download=yes';`): i.fas.fa-download
+				button.resource-buttons(class=resourceId title='Download' onclick=`window.location = '${domain}/${resourceId}/direct?download=yes'; return false;`): i.fas.fa-download
 				button.resource-buttons(class=resourceId title='Copy URL' onclick=`copyUrl('${domain}/${resourceId}');`): i.fas.fa-clone
 				button.resource-buttons(class=resourceId title='Delete' onclick=`deleteResource('/${resourceId}/delete/${resourceData.deleteId}');`): i.fas.fa-trash-alt
 				button.resource-buttons(class=resourceId title='Open direct resource in new tab' onclick=`window.open('${domain}/${resourceId}/direct', '_blank').focus();`): i.fas.fa-external-link
