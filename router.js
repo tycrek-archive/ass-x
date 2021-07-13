@@ -108,7 +108,7 @@ router.get('/user', async (req, res, next) => {
 				pages: req.pages,
 				brand: FRONTEND_BRAND_COMBO,
 				user: users[activeTokens[req.session.token]],
-				uploads: uploads.reverse().slice(req.pages.pagination, req.pages.pagination + PAGE_SIZE),
+				uploads: uploads.sort(([, a], [, b]) => b.timestamp - a.timestamp).slice(req.pages.pagination, req.pages.pagination + PAGE_SIZE),
 				totalUploads: uploads.length
 			}))
 		.catch(next);
