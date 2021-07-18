@@ -21,7 +21,7 @@ button {
 }
 
 button:hover { box-shadow: inset 0 0 0 0 var(--color-primary-dark), inset 0 -8px 0 0 var(--color-primary-dim); }
-button:active { box-shadow: inset 0 -8px 0 0 var(--color-primary-dark), inset 0 -64px 0 0 var(--color-primary-dim); }
+button:active { box-shadow: inset 0 0 0 0 var(--color-primary-dark), inset 0 -2px 0 0 var(--color-primary-dim); }
 
 #brand {
 	border-top: 2px solid #323232;
