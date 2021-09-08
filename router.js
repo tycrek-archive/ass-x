@@ -8,8 +8,8 @@ const { name, version } = require('./package.json');
 const { name: nameAss, version: versionAss } = require('../package.json');
 const { useSsl } = require('../config.json');
 const { CODE_OK, CODE_UNAUTHORIZED } = require('../MagicNumbers.json');
-const random = require('../generators/gfycat');
-const { formatTimestamp, formatBytes, getResourceColor } = require('../utils');
+const random = require('../src/generators/gfycat');
+const { formatTimestamp, formatBytes, getResourceColor } = require('../src/utils');
 const path = require('path');
 
 // Setup Express router
@@ -21,8 +21,8 @@ const session = require('express-session');
 const MemoryStore = require('memorystore')(session);
 
 // Data & users
-const users = require('../auth');
-const data = require('../data');
+const users = require('../src/auth');
+const data = require('../src/data');
 const activeTokens = {};
 
 // Constants
