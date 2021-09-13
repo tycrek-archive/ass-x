@@ -8,7 +8,7 @@ const { name, version } = require('./package.json');
 const { name: nameAss, version: versionAss } = require('../package.json');
 const { useSsl } = require('../config.json');
 const { CODE_OK, CODE_UNAUTHORIZED } = require('../MagicNumbers.json');
-const random = require('../dist/generators/gfycat');
+const random = require('../dist/generators/gfycat').default;
 const { formatTimestamp, formatBytes, getResourceColor } = require('../dist/utils');
 const path = require('path');
 
