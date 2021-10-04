@@ -21,8 +21,8 @@ const session = require('express-session');
 const MemoryStore = require('memorystore')(session);
 
 // Data & users
-const users = require('../dist/auth');
-const data = require('../dist/data');
+const users = require('../dist/auth').users;
+const data = require('../dist/data').data;
 const activeTokens = {};
 
 // Constants
