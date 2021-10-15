@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.brand {
+	@apply pt-4 border-t-2 border-t-border;
+}

@@ -11,6 +11,7 @@ const { CODE_OK, CODE_UNAUTHORIZED } = require('../MagicNumbers.json');
 const random = require('../dist/generators/gfycat').default;
 const { formatTimestamp, formatBytes, getResourceColor } = require('../dist/utils');
 const path = require('path');
+const epcss = require('@tycrek/express-postcss');
 
 // Setup Express router
 const express = require('express');
@@ -62,6 +63,35 @@ router.use(session({
 	secret: random({ gfyLength: GFYCAT }),
 	store: new MemoryStore({ checkPeriod: TIME_24H }),
 }));
+
+// CSS
+const cssPath = path.join(process.cwd(), 'ass-x', 'css.css');
+const tailwindcss = require('tailwindcss')({
+	mode: 'jit',
+	separator: '_',
+	darkMode: 'class',
+	plugins: [
+		//require('tailwindcss-textshadow')
+	],
+	purge: {
+		enabled: false,
+		content: ['./views/**/*.pug']
+	},
+	theme: {
+		extend: {
+			colors: {
+				'border': '#323232'
+			}
+		}
+	}
+});
+const plugins = [
+	tailwindcss,
+	require('autoprefixer')(),
+	require('cssnano')(),
+	//require('postcss-font-magician')(),
+];
+router.use('/css', epcss({ cssPath, plugins, warn: (warning) => log.warn('PostCSS', warning.toString()) }));
 
 // Verify session
 router.use('/user', verifySession);

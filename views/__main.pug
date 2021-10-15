@@ -1,6 +1,8 @@
 include ../../views/head
+link(rel='stylesheet', href='/dashboard/css')
 style: include ../../views/css/font.css
 style: include __main.css
 
 mixin brand
-	h6#brand!= brand
+	h6.brand!= brand
+	//h6.pt-4.border-t-2.border-t-border!= brand

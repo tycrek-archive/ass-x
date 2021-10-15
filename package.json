@@ -1,6 +1,6 @@
 {
   "name": "ass-x",
-  "version": "0.4.3-ts",
+  "version": "0.4.3",
   "description": "Private front-end for ass premium",
   "private": true,
   "main": "router.js",
@@ -9,6 +9,7 @@
     "npm": ">=7.x.x"
   },
   "scripts": {
+    "start": "cd .. && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,9 +23,14 @@
   },
   "homepage": "https://github.com/tycrek/ass-x#readme",
   "dependencies": {
+    "@tycrek/express-postcss": "^0.1.0",
+    "autoprefixer": "^10.3.7",
+    "cssnano": "^5.0.8",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "memorystore": "^1.6.6",
-    "pug": "^3.0.2"
+    "postcss-font-magician": "^3.0.0",
+    "pug": "^3.0.2",
+    "tailwindcss": "^2.2.17"
   }
 }
